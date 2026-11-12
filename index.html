@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>飲料杯杯</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🧋%3C/text%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Chiron+GoRound+TC:wght@400;500&family=Hachi+Maru+Pop&display=swap">
+<style>
+:root{--bg:#fbeae7;--card:#fffafa;--ink:#4f4954;--mute:#756a76;--line:#f1d3d0;--pink:#f6d3d8;--blue:#d6e2ea;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.6;font-family:"LXGW WenKai TC","Chiron GoRound TC",system-ui,"PingFang TC","Microsoft JhengHei",sans-serif;font-size:19px;
+background-image:none;height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;overflow-x:hidden}
+.h{font-weight:700}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.deco{position:fixed;inset:0;pointer-events:none;overflow:hidden}.deco svg{position:absolute;inset:0;width:100%;height:100%}
+.deco b{position:absolute;font-size:140px;font-weight:400;line-height:1;opacity:.2;filter:blur(1.5px)}
+main{position:relative;width:100%;max-width:480px;margin:0 auto;padding:12px 10px 6px;flex:1;min-height:0;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between}
+.top h1{margin:0;font-size:30px;font-weight:400}
+.arr{width:40px;height:40px;border-radius:50%;border:2px solid var(--ink);background:var(--card);font-size:20px;line-height:1}
+.stat{text-align:center;font-size:18px;margin:6px 0 12px;color:var(--mute)}
+.frame{background:var(--card);border:2.5px solid var(--ink);border-radius:28px;padding:12px 6px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);position:relative}.wkrow{margin-top:4px}#cal{flex:0 1 auto;height:calc(var(--n,5)*88px);min-height:calc(var(--n,5)*54px);grid-template-rows:repeat(var(--n,5),1fr)}.grid svg.ck{position:absolute;inset:0;pointer-events:none}
+.wk{text-align:center;color:var(--mute);font-size:17px;font-weight:400;padding-bottom:2px;font-family:"Hachi Maru Pop","Chiron GoRound TC",sans-serif}
+.day{line-height:1.25;border:0;border-radius:6px;background:none;padding:4px 0;display:flex;flex-direction:column;align-items:center;font-size:17px}
+.day:disabled{opacity:.35;cursor:default}
+.day.today{background:var(--pink);background:color-mix(in srgb,var(--pink) 70%,transparent)}
+.ic{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;flex:1}
+.more{font-size:15px;font-weight:700}.row{display:flex;gap:1px;align-items:center;justify-content:center}.row.two{position:relative;display:block;width:48px;height:50px}.row.two svg{position:absolute}.row.two svg:first-child{left:0;top:0}.row.two svg:nth-of-type(2){right:0;top:18px}.row.two .more{position:absolute;left:2px;bottom:0}
+#sheet{position:fixed;inset:0;z-index:5;background:var(--bg);overflow:auto;padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(40px + env(safe-area-inset-bottom,0px))}
+#sheet .in{position:relative;max-width:480px;margin:0 auto}
+.back{border:0;background:none;font-size:18px;padding:6px 0}
+.sh{display:inline-block;margin:6px 0 14px;padding:2px 22px;font-size:30px;font-weight:700;line-height:1.4;background:repeating-linear-gradient(135deg,var(--pink) 0 9px,var(--pink2,#fce9ec) 9px 18px);transform:rotate(-1.2deg);box-shadow:0 1px 2px #0001}
+.wall{display:flex;flex-wrap:wrap;gap:16px 4%;padding:6px 2px 4px}
+.st{cursor:pointer;position:relative;width:46%;background:#fff;border:1.5px solid #e4d9cb;border-radius:4px;padding:10px 8px 8px;box-shadow:0 2px 6px #7a60601f}
+.tape{position:absolute;top:-10px;width:56px;height:18px;opacity:.85;transform:rotate(-4deg)}
+.st img{width:100%;border-radius:3px;display:block}
+.lab{display:flex;align-items:center;justify-content:center;aspect-ratio:1;border:2px solid var(--ink);border-radius:30px;background:#fffefa}
+.cap{font-size:17px;margin-top:6px;line-height:1.4}
+.cap small{display:block;color:var(--mute)}
+.x{position:absolute;right:6px;top:6px;border:0;background:var(--card);border-radius:50%;width:26px;height:26px;font-size:12px;opacity:.8}
+.blank{color:var(--mute);margin:6px 0 10px}
+.paper{position:relative;background:#fffdf5;background-image:radial-gradient(circle,#ddd3c4 1px,transparent 1.3px);background-size:16px 16px;border-radius:10px;padding:30px 14px 24px;margin-top:22px;box-shadow:0 2px 10px #7a60601f}
+.rings{position:absolute;left:10px;right:10px;top:-14px;display:flex;justify-content:space-between;pointer-events:none}
+.rings i{width:12px;height:28px;border:3px solid #cdb08f;border-radius:7px;background:var(--bg)}
+.rib{display:inline-block;background:#d3e5e8;padding:2px 26px 2px 14px;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 50%,100% 100%,0 100%);font-weight:700;margin:4px 0 10px}
+.bubble{position:relative;border:2px solid var(--ink);border-radius:20px;padding:12px 14px 8px;margin-top:20px;background:#fffefa}
+
+#note{border:0;background-color:transparent}#note::placeholder{color:var(--mute);opacity:.55}#note:focus::placeholder{color:transparent}
+.pr{position:absolute;right:-8px;bottom:-10px;background:#fff7e0;border:1.5px dashed #c9a56a;border-radius:999px;padding:0 10px;font-size:16px;line-height:1.6;transform:rotate(-6deg)}
+.tape{background-image:repeating-linear-gradient(90deg,#fff7 0 3px,transparent 3px 8px)}
+.btn{border:2.5px solid var(--ink);background:var(--card);border-radius:999px;padding:8px 18px;margin:4px 6px 4px 0}
+.btn.fill{background:var(--pink)}
+.box{margin-top:14px;padding:14px;display:none}
+.box.on{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{border:2px solid var(--line);background:none;border-radius:999px;padding:3px 12px;display:inline-flex;align-items:center;gap:4px}
+.chip[aria-pressed="true"]{border-color:var(--ink);background:var(--pink)}
+.lbl{font-size:16px;color:var(--mute);margin-top:8px}
+input[type=text],input[type=number],textarea{width:100%;border:2px solid var(--line);border-radius:16px;background:var(--bg);padding:8px 12px}
+textarea{min-height:110px;resize:vertical;line-height:1.9;background-image:repeating-linear-gradient(transparent,transparent 31px,var(--line) 32px)}
+.file{display:inline-block;border:2px dashed var(--ink);border-radius:999px;padding:6px 16px;margin:6px 6px 0 0}
+.file input{display:none}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:7px 16px;border-radius:999px;font-size:17px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:9}
+.toast.on{opacity:1}
+.brand{font-family:"Hachi Maru Pop","Chiron GoRound TC",sans-serif;font-weight:400;text-align:center;font-size:19px;margin:0 0 6px}
+.ttl{border:0;background:none;font:inherit;font-size:30px;padding:2px 10px}.ttl::after{content:" ▾";font-size:16px;color:var(--mute)}
+#picker{position:fixed;inset:0;z-index:7;background:#4a3f4a55;display:flex;align-items:center;justify-content:center;padding:20px}#picker[hidden]{display:none}
+.pbox{background:#fffdf5;border-radius:22px;padding:18px;width:100%;max-width:340px;box-shadow:0 6px 24px #0003;max-height:88vh;overflow:auto}
+.prow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:22px}
+.pm{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.pm .chip{justify-content:center;padding:8px 0}
+.fab{display:flex;justify-content:center;gap:10px;padding:4px 10px 10px;position:relative}.fab .btn{margin:0;box-shadow:0 2px 8px #7a60602b}
+.foot{margin:0 auto;width:100%;max-width:520px;position:relative}.foot svg{display:block;width:100%;height:clamp(120px,22vh,230px);overflow:visible}
+#cX{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}#cX .chip{flex-direction:column;border-radius:20px;padding:6px 0;gap:0}
+.lk{border:0;background:none;font:inherit;text-decoration:underline;text-underline-offset:4px;color:var(--ink);padding:0}
+.sl{max-height:50vh;overflow:auto;margin-bottom:10px}.srow{display:flex;justify-content:space-between;gap:8px;width:100%;border:0;border-bottom:1px dashed var(--line);background:none;padding:8px 2px;text-align:left}
+.bk{position:absolute;right:12px;top:14px;border:0;background:none;font:inherit;font-size:16px;text-decoration:underline;text-underline-offset:4px;padding:2px}.bkl{right:auto;left:12px}.sw{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:10px 0}.sw button{height:46px;border-radius:50%;border:2px solid var(--line);padding:0}.sw button[aria-pressed="true"]{border:3px solid var(--ink)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="bl"><feGaussianBlur stdDeviation=".5"/></filter></svg>
+<div class="deco" id="deco"></div>
+<main>
+  <div class="brand">飲料杯杯</div><button class="bk" onclick="bkOpen()">備份</button><button class="bk bkl" onclick="thOpen()">換顏色</button>
+  <div class="top">
+    <button class="arr" onclick="mv(-1)" aria-label="上個月">‹</button>
+    <h1><button class="ttl" id="ttl" onclick="pkOpen()" aria-haspopup="dialog"></button></h1>
+    <button class="arr" onclick="mv(1)" aria-label="下個月">›</button>
+  </div>
+  <p class="stat h" id="stat"></p>
+  <div class="grid wkrow" id="wkrow"></div>
+  <div class="grid" id="cal"></div>
+  <div style="flex:2"></div><div class="fab" id="fab"><button class="btn fill" onclick="quickToday()">＋ 記今天</button><button class="btn" id="nb" onclick="nodToday()">今天沒喝</button></div><div style="flex:1"></div>
+</main>
+<div class="foot" id="foot" aria-hidden="true"><svg viewBox="0 70 400 220" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1efd8"/><stop offset="1" stop-color="#b3bd86"/></linearGradient><linearGradient id="gt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e6dc"/><stop offset="1" stop-color="#c49c86"/></linearGradient><filter id="gr"><feTurbulence baseFrequency=".85" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -1.6 1.15" result="s"/><feComposite in="SourceGraphic" in2="s" operator="in"/></filter></defs><path d="M-400 130H0C28 108 52 74 96 100S152 160 204 122S268 44 312 66S372 126 400 108H800V290H-400Z" fill="#fffdfa"/><g fill="#6b4630"><circle cx="30" cy="96" r="10"/><circle cx="158" cy="112" r="11"/><circle cx="210" cy="170" r="10"/><circle cx="372" cy="86" r="10"/></g><g transform="translate(100 188) rotate(-18)"><path filter="url(#gr)" d="M-36-40H36L28 30Q26 52 8 52H-8Q-26 52-28 30Z" fill="url(#gm)"/><g fill="#4a3226"><circle cx="-14" cy="32" r="7"/><circle cx="3" cy="38" r="7"/><circle cx="17" cy="28" r="7"/><circle cx="-4" cy="18" r="7"/><circle cx="12" cy="10" r="7"/><circle cx="-18" cy="12" r="7"/></g><rect x="-41" y="-52" width="82" height="13" rx="6" fill="#f7f4ec" stroke="#e6dfd2"/><path d="M6-44L30-104" stroke="#f4efe6" stroke-width="9" stroke-linecap="round" opacity=".9"/></g><g transform="translate(300 186) rotate(14)"><path filter="url(#gr)" d="M-36-40H36L28 30Q26 52 8 52H-8Q-26 52-28 30Z" fill="url(#gt)"/><g fill="#4a3226"><circle cx="-15" cy="30" r="7"/><circle cx="2" cy="37" r="7"/><circle cx="16" cy="26" r="7"/><circle cx="-6" cy="16" r="7"/><circle cx="10" cy="8" r="7"/><circle cx="-19" cy="10" r="7"/></g><rect x="-41" y="-52" width="82" height="13" rx="6" fill="#f7f4ec" stroke="#e6dfd2"/><path d="M4-44L-22-104" stroke="#f4efe6" stroke-width="9" stroke-linecap="round" opacity=".9"/></g></svg></div>
+<div id="sheet" hidden></div>
+<div id="picker" hidden onclick="if(event.target===this)closePk()"></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const TY={boba:['手搖飲','#ecc9cc'],cvs:['超商','#d8dfc6'],tea:['茶','#dccfa8'],coffee:['咖啡','#cdb29d'],juice:['果汁','#f3d6a4'],soda:['汽水','#c5d3dc'],alc:['酒','#d6c6e0']};
+const IC={
+boba:'<path d="M6 8h12l-1.4 12a1 1 0 0 1-1 .9H8.4a1 1 0 0 1-1-.9z"/><path d="M5.5 8h13M13 8l2-5"/>',
+pearl:'<path d="M6 8h12l-1.4 12a1 1 0 0 1-1 .9H8.4a1 1 0 0 1-1-.9z"/><path d="M5.5 8h13M13 8l2-5"/><circle cx="10" cy="17.5" r=".9"/><circle cx="12.6" cy="17.5" r=".9"/><circle cx="15" cy="17.5" r=".9"/><circle cx="11.3" cy="15.2" r=".9"/><circle cx="13.9" cy="15.2" r=".9"/>',
+ice:'<path d="M6 11h12l-1 8a1 1 0 0 1-1 .9H8a1 1 0 0 1-1-.9z"/><path d="M7 11a5 4 0 0 1 10 0M12 7V3.5"/>',
+carton:'<path d="M8 8l2-4h4l2 4v11a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1z"/><path d="M8 8h8M10 13h4"/>',
+cvs:'<path d="M10 3h4v3l1.6 2.4V19a1.5 1.5 0 0 1-1.5 1.5H9.9A1.5 1.5 0 0 1 8.4 19V8.4L10 6z"/><path d="M8.4 12h7.2"/>',
+tea:'<path d="M5 9h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 10.5h1.5a2 2 0 0 1 0 4H16M8 5.5c0 1 1 1 1 2M12 5.5c0 1 1 1 1 2"/>',
+coffee:'<path d="M5 7h11v9a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z"/><path d="M16 9h1.5a2 2 0 0 1 0 5H16"/>',
+juice:'<path d="M6.5 5h11l-1.2 14a1 1 0 0 1-1 .9H8.7a1 1 0 0 1-1-.9z"/><path d="M7 10h10"/>',
+soda:'<rect x="7" y="4" width="10" height="16" rx="2.5"/><path d="M7 8h10M7 16h10"/>',
+alc:'<path d="M8 4h8c.4 4-.8 7-4 7s-4.4-3-4-7z"/><path d="M12 11v8M8.5 19.5h7"/>'};
+const dk=(h,k)=>'#'+[1,3,5].map(i=>Math.round(parseInt(h.substr(i,2),16)*k).toString(16).padStart(2,'0')).join('');
+IC.pearl=IC.boba+'<circle cx="10" cy="17.6" r="1.1" fill="#6b5a55" stroke="none"/><circle cx="13" cy="17.6" r="1.1" fill="#6b5a55" stroke="none"/><circle cx="15.2" cy="16" r="1.1" fill="#6b5a55" stroke="none"/><circle cx="11.5" cy="15.4" r="1.1" fill="#6b5a55" stroke="none"/><circle cx="14" cy="14.6" r="1" fill="#6b5a55" stroke="none"/>';
+let gi=0;
+const ico=(t,s)=>'<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[t]+'</svg>';
+const THUMB='<svg width="40" height="40" viewBox="0 0 24 24" fill="#f9e9a8" stroke="var(--ink)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-label="沒喝飲料"><path d="M3.5 11h4v9h-4z"/><path d="M7.5 11l3.2-6.5c1.3 0 2.1.9 2.1 2V10h5.2a1.6 1.6 0 0 1 1.6 1.9l-1.1 6.6A2 2 0 0 1 16.5 20H7.5"/></svg>';
+const COL={pearl:'#e5cfc6',ice:'#cfe3ea',carton:'#f6ebcc'};
+const ICL=['boba','pearl','ice','tea','coffee','juice','soda','alc','carton','cvs'];
+const ICN={boba:'手搖杯',pearl:'珍珠杯',ice:'冰沙',tea:'茶杯',coffee:'馬克杯',juice:'玻璃杯',soda:'汽水罐',alc:'酒杯',carton:'盒裝',cvs:'寶特瓶'};
+const MON=['🍵','🍓','🌸','🌿','🥭','🍋','🍉','🧊','🍊','🌼','🧋','☕'];
+const SUG=['無糖','微糖','半糖','少糖','全糖'],ICE=['去冰','微冰','少冰','正常冰','熱'];
+const p=n=>String(n).padStart(2,'0'),key=d=>d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const hash=s=>[...s].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);
+let data={start:key(new Date()),entries:[],notes:{},nodrink:{},favs:[]};
+try{const s=JSON.parse(localStorage.getItem('drinkjournal')||'null');if(s&&s.entries)data=Object.assign(data,s)}catch(e){}
+const persist=()=>{try{localStorage.setItem('drinkjournal',JSON.stringify(data))}catch(e){toast('儲存空間滿了，照片可能存不下')}};
+persist();
+const E=k=>data.entries.filter(e=>e.d===k).sort((a,b)=>a.ts-b.ts);
+const $=id=>document.getElementById(id);
+const now=new Date();let cur={y:now.getFullYear(),m:now.getMonth()},day=null,F={};
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('on'),1600)}
+let pk=0;
+function pkOpen(){pk=cur.y;pkDraw()}
+function pkDraw(){const o=$('picker');o.hidden=false;o.innerHTML='<div class="pbox" role="dialog" aria-label="選擇年月"><div class="prow"><button class="arr" onclick="pk--;pkDraw()" aria-label="前一年">‹</button><b>'+(pk-1911)+'年</b><button class="arr" onclick="pk++;pkDraw()" aria-label="後一年">›</button></div><div class="pm">'+[...Array(12)].map((_,i)=>'<button class="chip" aria-pressed="'+(pk===cur.y&&i===cur.m)+'" onclick="goM('+i+')">'+(i+1)+'月</button>').join('')+'</div><button class="btn" onclick="goT()">回到這個月</button></div>'}
+function closePk(){$('picker').hidden=true}
+function goM(i){cur={y:pk,m:i};closePk();render()}
+function goT(){const n=new Date();cur={y:n.getFullYear(),m:n.getMonth()};closePk();render()}
+function quickToday(){const n=new Date();cur={y:n.getFullYear(),m:n.getMonth()};render();openDay(key(n));$('box').classList.add('on')}
+function nodToday(){const k=key(new Date());if(E(k).length)return;if(data.nodrink[k])delete data.nodrink[k];else data.nodrink[k]=1;persist();render();toast(data.nodrink[k]?'今天沒喝，給你一個讚':'已取消')}
+let RH=84,bk=null,cp=null,eid=null,fe=null,fm=false;
+function fit(){const rows=Math.ceil((new Date(cur.y,cur.m,1).getDay()+new Date(cur.y,cur.m+1,0).getDate())/7);document.documentElement.style.setProperty('--n',rows);RH=Math.max(54,Math.floor($('cal').clientHeight/rows)||84)}
+function fitOld(){const rows=Math.ceil((new Date(cur.y,cur.m,1).getDay()+new Date(cur.y,cur.m+1,0).getDate())/7),top=$('cal').getBoundingClientRect().top+scrollY,av=(window.visualViewport?visualViewport.height:innerHeight)-top-$('fab').offsetHeight-$('foot').offsetHeight-parseFloat(getComputedStyle(document.querySelector('main')).paddingBottom)-parseFloat(getComputedStyle(document.documentElement).paddingBottom)-4;RH=Math.max(60,Math.min(88,Math.floor(av/rows)));document.documentElement.style.setProperty('--rh',RH+'px')}
+function spend(){const pre=cur.y+'-'+p(cur.m+1)+'-',es=data.entries.filter(e=>e.d.startsWith(pre)).sort((a,b)=>a.ts-b.ts),tot=es.reduce((s,e)=>s+(e.price||0),0),tc=es.filter(e=>e.treat).length,o=$('picker');o.hidden=false;o.innerHTML='<div class="pbox" role="dialog" aria-label="總花費"><div class="prow"><b>總花費　$'+tot+'</b></div>'+(tc?'<p class="blank">被請客 '+tc+' 杯，沒有算進去</p>':'')+'<div class="sl">'+(es.length?es.map(e=>'<button class="srow" onclick="closePk();openDay(\''+e.d+'\')"><span>'+(+e.d.slice(5,7))+'/'+(+e.d.slice(8))+'　'+esc(e.name)+'</span><b>'+(e.treat?'被請客':(e.price!=null?'$'+e.price:'未填'))+'</b></button>').join(''):'<p class="blank">這個月還沒有記錄</p>')+'</div><button class="btn" onclick="closePk()">關閉</button></div>'}
+function bkOpen(){const o=$('picker');o.hidden=false;o.innerHTML='<div class="pbox" role="dialog" aria-label="備份與還原"><div class="prow"><b>備份與還原</b></div><p class="blank">備份會存成檔案，換手機或清除資料前先存一份。</p><button class="btn fill" onclick="bkSave()">存成備份檔</button><label class="file">選擇備份檔還原<input type="file" accept=".json,application/json" onchange="bkRead(this)"></label><div id="bkmsg"></div><button class="btn" onclick="closePk()">關閉</button></div>'}
+function bkSave(){try{const b=new Blob([JSON.stringify(data)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='drink-backup-'+key(new Date())+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('已存好')}catch(e){toast('備份失敗')}}
+function bkRead(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const s=JSON.parse(r.result);if(!s||!Array.isArray(s.entries))throw 0;bk=s;$('bkmsg').innerHTML='<p>這份備份有 '+s.entries.length+' 杯記錄，會取代目前的資料。</p><button class="btn fill" onclick="bkGo()">確定還原</button>'}catch(e){$('bkmsg').innerHTML='<p>這個檔案看起來不是備份檔。</p>'}};r.readAsText(f)}
+function bkGo(){data=Object.assign({start:key(new Date()),entries:[],notes:{},nodrink:{},favs:[]},bk);persist();applyTh();closePk();render();toast('已還原')}
+function edit(id){const e=data.entries.find(x=>x.id===id);if(!e)return;eid=id;fe=null;F={type:e.type,icon:e.icon||e.type,name:e.name,price:e.price==null?'':String(e.price),treat:!!e.treat,sugar:e.sugar||'半糖',ice:e.ice||'少冰',sticker:e.sticker||null,cup:e.cup||null};$('nm').value=F.name;$('pr').value=F.price;$('pr').disabled=F.treat;$('tr').setAttribute('aria-pressed',F.treat);$('f1').textContent=F.sticker?'已有照片':'';$('f2').textContent=F.cup?'已有照片':'';$('box').classList.add('on');$('addb').textContent='儲存修改';refresh2();$('box').scrollIntoView({behavior:'smooth',block:'center'})}
+function favEdit(i){const f=data.favs[i];fe=i;eid=null;F={type:f.type,icon:f.icon||f.type,name:f.name,price:f.price==null?'':String(f.price),treat:false,sugar:f.sugar||'半糖',ice:f.ice||'少冰',sticker:null,cup:null};$('nm').value=F.name;$('pr').value=F.price;$('pr').disabled=false;$('tr').setAttribute('aria-pressed','false');$('f1').textContent='';$('f2').textContent='';$('addb').textContent='更新常喝清單';refresh2()}
+function favDel(i){data.favs.splice(i,1);persist();refresh(1)}
+const TH={pink:['粉色','#fbeae7','#f1d3d0','#f6d3d8','#fff3f0','#f6cfca','#f3c6c1','#eab3b0','#fce9ec'],blue:['天藍','#e9f2f8','#cfe0ec','#cfe2f1','#f3f9fd','#cfe3f2','#bdd6ea','#a9c8e0','#eaf3fa'],yellow:['鵝黃','#fcf5dc','#efe3b8','#f6e7a6','#fffbea','#f8e9ab','#f2dd92','#e3cb7a','#fdf6d6'],mint:['薄荷綠','#e8f5ee','#cfe6d9','#cfe8da','#f3fbf6','#cfe8da','#b9dcc8','#9fcdb4','#eaf6ef'],lav:['薰衣草','#efeaf7','#dcd3ec','#ddd2f0','#f8f5fd','#ddd3ef','#cdbfe6','#bba9dc','#f2edfa']};
+function applyTh(){const t=TH[data.theme]||TH.pink,r=document.documentElement.style;r.setProperty('--bg',t[1]);r.setProperty('--line',t[2]);r.setProperty('--pink',t[3]);r.setProperty('--pink2',t[8])}
+function thOpen(){const o=$('picker'),c=data.theme||'pink';o.hidden=false;o.innerHTML='<div class="pbox" role="dialog" aria-label="換顏色"><div class="prow"><b>換顏色</b></div><div class="sw">'+Object.keys(TH).map(k=>'<button style="background:'+TH[k][6]+'" aria-pressed="'+(c===k)+'" aria-label="'+TH[k][0]+'" onclick="setTh(\''+k+'\')"></button>').join('')+'</div><p class="blank">'+TH[c][0]+'</p><button class="btn" onclick="closePk()">完成</button></div>'}
+function setTh(k){data.theme=k;persist();applyTh();render();thOpen()}
+function mv(n){const d=new Date(cur.y,cur.m+n,1);cur={y:d.getFullYear(),m:d.getMonth()};render()}
+function streak(){let s=0,d=new Date(),k=key(d);if(!(data.nodrink[k]&&!E(k).length))d.setDate(d.getDate()-1);
+ for(;;d.setDate(d.getDate()-1)){k=key(d);if(k<data.start||E(k).length)break;s++}return s}
+const WC=[['#dfe8d2','#f3d9d9','#e9e2c9'],['#f6c9cf','#fbe3df','#e8d6e4'],['#f8d3dc','#fbe9ec','#d9e4f0'],['#cfe8dc','#e6f1d8','#f9e6e8'],['#fbe0b5','#fbd3c7','#f9ecc8'],['#f6efb5','#e6f0c6','#f8e0d6'],['#f7c1c4','#cfe6c8','#fbe2e0'],['#cfe3f1','#dcebf6','#f3dfe6'],['#f9e3a8','#f6d0b8','#e6efc8'],['#f7dca8','#f4cfb6','#f5e6c8'],['#e6cfc2','#f1d9d4','#d9cbd6'],['#e9cfc6','#f6d6d6','#efe0d0']];
+function chalk(){
+ const g=$('cal'),w=g.clientWidth,rows=Math.ceil(g.children.length/7),h=rows*RH,cw=w/7;
+ const rn=i=>{const x=Math.sin(i*12.9898)*43758.5453;return x-Math.floor(x)-.5};
+ const ln=(x1,y1,x2,y2,s)=>{let d='M'+x1+' '+y1;for(let i=1;i<=8;i++){const t=i/8;d+='L'+(x1+(x2-x1)*t+(x1===x2?rn(s+i)*2.4:0)).toFixed(1)+' '+(y1+(y2-y1)*t+(y1===y2?rn(s+i)*2.4:0)).toFixed(1)}return d};
+ let p='';
+ for(let r=0;r<=rows;r++)p+='<path d="'+ln(6,r*RH,w-6,r*RH,r*7+1)+'"/>';
+ for(let c=1;c<7;c++)p+='<path d="'+ln(c*cw,6,c*cw,h-6,c*3+40)+'"/>';
+ g.insertAdjacentHTML('beforeend','<svg class="ck" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" aria-hidden="true"><defs><filter id="cr" x="-2%" y="-5%" width="104%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" result="d"/><feComponentTransfer in="n" result="m"><feFuncA type="discrete" tableValues="0 1 1 1"/></feComponentTransfer><feComposite in="d" in2="m" operator="in"/></filter></defs><g fill="none" stroke-width="2.6" stroke-linecap="round" style="stroke:'+(TH[data.theme]||TH.pink)[7]+'" filter="url(#cr)">'+p+'</g></svg>');
+}
+function wc(){const t=TH[data.theme]||TH.pink;return wcBase().replace(/#fff3f0/g,t[4]).replace(/#f6cfca/g,t[5]).replace(/#f3c6c1/g,t[6])}
+function wcBase(){return '<svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><filter id="pf"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="5"/><feColorMatrix values="0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .45 0 0 0 .07 0"/></filter><filter id="ac" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".012 .3" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="30" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g fill="none" stroke-linecap="round" filter="url(#ac)"><path d="M-30 70Q200 20 430 90" stroke="#fff3f0" stroke-width="120" opacity=".5"/><path d="M-30 230Q220 170 430 260" stroke="#f6cfca" stroke-width="130" opacity=".35"/><path d="M-30 400Q180 340 430 420" stroke="#fff3f0" stroke-width="120" opacity=".5"/><path d="M-30 560Q230 500 430 580" stroke="#f3c6c1" stroke-width="130" opacity=".3"/><path d="M-30 730Q200 680 430 750" stroke="#fff3f0" stroke-width="120" opacity=".5"/></g><g fill="#6b4630" opacity=".85"><circle cx="368" cy="150" r="9"/><circle cx="20" cy="330" r="8"/><circle cx="382" cy="470" r="10"/></g><rect width="400" height="800" filter="url(#pf)"/></svg>'}
+function wcOld(m){const c=WC[m];return '<svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><filter id="wf" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="'+(m+3)+'" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="70" result="d"/><feGaussianBlur in="d" stdDeviation="5"/></filter><filter id="pf"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5"/><feColorMatrix values="0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .45 0 0 0 .07 0"/></filter></defs><g filter="url(#wf)" opacity=".8"><circle cx="30" cy="90" r="120" fill="'+c[0]+'"/><ellipse cx="390" cy="330" rx="120" ry="160" fill="'+c[1]+'"/><circle cx="80" cy="660" r="140" fill="'+c[2]+'"/><ellipse cx="350" cy="770" rx="120" ry="90" fill="'+c[0]+'"/></g><rect width="400" height="800" filter="url(#pf)"/></svg>'}
+function render(){
+  const {y,m}=cur,tk=key(new Date()),first=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate();
+  $('ttl').textContent=(y-1911)+'年'+(m+1)+'月';$('nb').style.display=E(tk).length?'none':'';$('nb').textContent=data.nodrink[tk]?'取消今天沒喝':'今天沒喝';
+  $('deco').innerHTML=wc();
+  $('wkrow').innerHTML=[...'日一二三四五六'].map(c=>'<div class="wk">'+c+'</div>').join('');fit();let h='<div></div>'.repeat(first);
+  for(let d=1;d<=n;d++){
+    const k=y+'-'+p(m+1)+'-'+d.toString().padStart(2,'0'),es=E(k),fut=k>tk;let c='';
+    if(es.length){const i0=e=>e.icon||e.type,sz=es.length>1?Math.max(20,Math.min(30,RH-52)):Math.min(46,RH-26);c='<span class="row'+(es.length>1?' two':'')+'">'+es.slice(0,2).map(e=>ico(i0(e),sz)).join('')+(es.length>2?'<b class="more">+'+(es.length-2)+'</b>':'')+'</span>'}
+    else if(!fut&&(data.nodrink[k]||(k>=data.start&&k<tk)))c=THUMB;
+    h+='<button class="day'+(k===tk?' today':'')+'"'+(fut?' disabled':'')+' onclick="openDay(\''+k+'\')"><span>'+d+'</span><div class="ic">'+c+'</div></button>';
+  }
+  $('cal').innerHTML=h;chalk();
+  const pre=y+'-'+p(m+1)+'-',cnt=data.entries.filter(e=>e.d.startsWith(pre)).length;
+  $('stat').innerHTML='這個月 '+cnt+' 杯　<button class="lk" onclick="spend()">總花費</button>';
+}
+function card(img,cap,id,r,tc,i,del){
+  return '<div class="st" onclick="edit(\''+id+'\')"><i class="tape" style="background-color:'+tc+';'+(i?'left:14px':'right:14px')+'"></i>'+img+'<div class="cap">'+cap+'</div>'+(del?'<button class="x" onclick="event.stopPropagation();del(\''+id+'\')" aria-label="刪除這杯">✕</button>':'')+'</div>';
+}
+function wall(k){
+  const es=E(k);if(!es.length)return '<p class="blank">這天還沒有貼上任何東西。</p>';
+  return '<div class="wall">'+es.map(e=>{
+    const h=hash(e.id),r=(h%9)-4,tc=['#ecc9cc','#c5d3dc','#e6d9b8'][h%3],sub=[e.sugar,e.ice].filter(Boolean).join('　');
+    const pr=e.treat?'被請客':(e.price!=null?'$'+e.price:''),cap=TY[e.type][0]+'　'+esc(e.name)+(sub?'<small>'+sub+'</small>':'')+(pr?'<span class="pr">'+pr+'</span>':'');
+    let o=card(e.sticker?'<img src="'+e.sticker+'" alt="">':'<div class="lab">'+ico(e.icon||e.type,64)+'</div>',cap,e.id,r,tc,h%2,1);
+    if(e.cup)o+=card('<img src="'+e.cup+'" alt="">','特別的杯子',e.id,-r+1,tc,(h+1)%2,0);
+    return o}).join('')+'</div>';
+}
+function openDay(k){
+  day=k;const d=new Date(k+'T12:00'),tk=key(new Date());
+  eid=null;fe=null;fm=false;F={type:'boba',icon:'boba',name:'',price:'',treat:false,sugar:'半糖',ice:'少冰',sticker:null,cup:null,special:false};
+  const sh=$('sheet');sh.hidden=false;sh.scrollTop=0;document.body.style.overflow='hidden';
+  sh.innerHTML='<div class="deco">'+wc(cur.m)+'</div><div class="in"><button class="back" onclick="closeDay()">‹ 回月曆</button><div class="paper"><div class="rings">'+'<i></i>'.repeat(9)+'</div><h2 class="sh">'+(d.getMonth()+1)+'月'+d.getDate()+'日　週'+'日一二三四五六'[d.getDay()]+'</h2><span class="rib">喝了什麼</span><div id="wall"></div><div id="act"></div>'+
+  '<div class="frame box" id="box"><div id="favs"></div><div class="lbl">種類</div><div class="chips" id="cT"></div><div class="lbl">圖示</div><div class="chips" id="cX"></div><div class="lbl">品項</div><input type="text" id="nm" placeholder="例如：桂花烏龍" oninput="F.name=this.value">'+
+  '<div id="sw"><div class="lbl">甜度</div><div class="chips" id="cS"></div></div><div class="lbl" id="lbI">冰量</div><div class="chips" id="cI"></div>'+
+  '<div class="lbl">價錢</div><div class="chips"><input type="number" id="pr" min="0" inputmode="numeric" placeholder="例如 65" style="width:120px" oninput="F.price=this.value"><button class="chip" id="tr" aria-pressed="false" onclick="tr(this)">被請客</button></div>'+
+  '<label class="file">上傳標籤／瓶身照片<input type="file" accept="image/*" onchange="pick(this,\'sticker\',\'f1\')"></label><span id="f1"></span><br>'+
+  '<label class="file">特別杯：上傳整杯照片<input type="file" accept="image/*" onchange="pick(this,\'cup\',\'f2\')"></label><span id="f2"></span><br>'+
+  '<button class="btn fill" id="addb" onclick="add()" style="margin-top:12px">貼上這杯</button></div>'+
+  '<div class="bubble"><textarea id="note" placeholder="寫點什麼…" oninput="data.notes[day]=this.value;persist()" aria-label="手帳備註"></textarea></div></div></div>';
+  $('note').value=data.notes[k]||'';
+  refresh(k===tk);refresh2();
+}
+function refresh(isToday){
+  $('wall').innerHTML=wall(day);
+  let a='<button class="btn fill" onclick="$(\'box\').classList.toggle(\'on\')">＋ 記一杯</button>';
+  if(!E(day).length)a+='<button class="btn" onclick="nod()">'+(data.nodrink[day]?'取消沒喝':'這天沒喝')+'</button>';
+  $('act').innerHTML=a;
+  $('favs').innerHTML=data.favs.length?'<div class="lbl">常喝清單　<button class="lk" onclick="fm=!fm;refresh(1)">'+(fm?'完成':'編輯')+'</button></div><div class="chips">'+data.favs.map((f,i)=>fm?'<span class="chip">'+ico(f.icon||f.type,18)+esc(f.name)+'<button class="lk" onclick="favEdit('+i+')" aria-label="編輯">✎</button><button class="lk" onclick="favDel('+i+')" aria-label="刪除">✕</button></span>':'<button class="chip" onclick="quick('+i+')">'+ico(f.icon||f.type,18)+esc(f.name)+'</button>').join('')+'</div>':'';
+  if(1){refresh2();return}
+  chips('cT',Object.keys(TY).map(k=>[TY[k][0],k]),'type');chips('cS',SUG.map(s=>[s,s]),'sugar');chips('cI',ICE.map(s=>[s,s]),'ice');
+}
+function chips(id,items,f){$(id).innerHTML=items.map(it=>'<button class="chip" aria-pressed="'+(F[f]===it[1])+'" onclick="tg(\''+f+'\',\''+it[1]+'\')">'+it[0]+'</button>').join('')}
+function tr(b){F.treat=!F.treat;b.setAttribute('aria-pressed',F.treat);$('pr').disabled=F.treat}
+function tg(f,v){F[f]=(F[f]===v&&f!=='type'&&f!=='icon')?'':v;if(f==='type'){F.icon=v;if(v==='cvs'&&!['冰','熱'].includes(F.ice))F.ice='冰';if(v!=='cvs'&&F.ice==='冰')F.ice='少冰'}refresh2()}
+function refresh2(){$('sw').style.display=F.type==='cvs'?'none':'block';chips('cT',Object.keys(TY).map(k=>[TY[k][0],k]),'type');chips('cS',SUG.map(s=>[s,s]),'sugar');$('lbI').textContent=F.type==='cvs'?'冰或熱':'冰量';chips('cI',(F.type==='cvs'?['冰','熱']:ICE).map(s=>[s,s]),'ice');chips('cX',ICL.map(i=>[ico(i,28)+'<span style="font-size:14px">'+ICN[i]+'</span>',i]),'icon')}
+function closeDay(){$('sheet').hidden=true;document.body.style.overflow='';render()}
+function shrink(file){return new Promise(r=>{const im=new Image(),u=URL.createObjectURL(file);im.onload=()=>{const s=Math.min(1,520/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);r(c.toDataURL('image/jpeg',.6))};im.onerror=()=>r(null);im.src=u})}
+function pick(inp,f,lab){const file=inp.files[0];if(!file)return;const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{cp={im,f,lab,u,z:1,x:0,y:0};cpDraw()};im.onerror=()=>{$(lab).textContent='讀不到這張照片'};im.src=u;inp.value=''}
+function cpDraw(){const o=$('picker');o.hidden=false;o.innerHTML='<div class="pbox"><canvas id="cv" width="280" height="280" style="width:100%;touch-action:none;border-radius:12px;background:#eee"></canvas><input type="range" id="zm" min="1" max="3" step=".05" value="1" style="width:100%" aria-label="縮放" oninput="cp.z=+this.value;cpPaint()"><p class="blank">拖曳照片、拉動滑桿，框出標籤</p><button class="btn fill" onclick="cpDone()">完成</button><button class="btn" onclick="closePk()">取消</button></div>';const c=$('cv');let d=null;c.onpointerdown=e=>{d=[e.clientX,e.clientY,cp.x,cp.y];c.setPointerCapture(e.pointerId)};c.onpointermove=e=>{if(!d)return;const k=280/c.clientWidth;cp.x=d[2]+(e.clientX-d[0])*k;cp.y=d[3]+(e.clientY-d[1])*k;cpPaint()};c.onpointerup=()=>{d=null};cpPaint()}
+function cpGeo(){const im=cp.im,s=Math.max(280/im.width,280/im.height)*cp.z,w=im.width*s,h=im.height*s;cp.x=Math.max(Math.min(cp.x,(w-280)/2),-(w-280)/2);cp.y=Math.max(Math.min(cp.y,(h-280)/2),-(h-280)/2);return [(280-w)/2+cp.x,(280-h)/2+cp.y,w,h]}
+function cpPaint(){const g=cpGeo(),x=$('cv').getContext('2d');x.clearRect(0,0,280,280);x.drawImage(cp.im,g[0],g[1],g[2],g[3])}
+function cpDone(){const g=cpGeo(),k=480/280,c=document.createElement('canvas');c.width=c.height=480;c.getContext('2d').drawImage(cp.im,g[0]*k,g[1]*k,g[2]*k,g[3]*k);F[cp.f]=c.toDataURL('image/jpeg',.7);$(cp.lab).textContent='已選好';URL.revokeObjectURL(cp.u);closePk()}
+function push(o){
+  data.entries.push(Object.assign({id:Date.now()+'-'+Math.random().toString(36).slice(2,6),d:day,ts:day===key(new Date())?Date.now():new Date(day+'T12:00').getTime()},o));
+  delete data.nodrink[day];persist();refresh(day===key(new Date()));toast('已貼上');
+}
+function add(){
+  const name=F.name.trim()||(F.sticker?'標籤':TY[F.type][0]);if(fe!==null){const q=F.type==='cvs'?'':F.sugar;data.favs[fe]={type:F.type,icon:F.icon,name,sugar:q,ice:F.ice,price:(F.treat||F.price==='')?null:+F.price};fe=null;persist();F.name='';F.price='';$('nm').value='';$('pr').value='';$('addb').textContent='貼上這杯';refresh(1);toast('已更新常喝清單');return}
+  const sg=F.type==='cvs'?'':F.sugar,ic=F.ice,ed=!!eid,o={type:F.type,icon:F.icon,name,sugar:sg,ice:ic,sticker:F.sticker,cup:F.cup,price:(F.treat||F.price==='')?null:+F.price,treat:F.treat};if(eid){Object.assign(data.entries.find(x=>x.id===eid),o);eid=null;persist();refresh(1);toast('已儲存修改')}else push(o);
+  if(!ed&&F.name.trim()&&!data.favs.some(f=>f.name===name&&f.type===F.type))data.favs.push({type:F.type,icon:F.icon,name,sugar:sg,ice:ic,price:(F.treat||F.price==='')?null:+F.price});
+  persist();F.name='';F.sticker=null;F.cup=null;F.price='';F.treat=false;$('pr').value='';$('pr').disabled=false;$('tr').setAttribute('aria-pressed','false');$('nm').value='';$('addb').textContent='貼上這杯';$('f1').textContent='';$('f2').textContent='';$('box').classList.remove('on');refresh(day===key(new Date()));
+}
+function quick(i){const f=data.favs[i];push({type:f.type,icon:f.icon,name:f.name,sugar:f.sugar,ice:f.ice,price:f.price??null})}
+function del(id){data.entries=data.entries.filter(e=>e.id!==id);persist();refresh(day===key(new Date()))}
+function nod(){data.nodrink[day]?delete data.nodrink[day]:data.nodrink[day]=1;persist();refresh(true)}
+applyTh();render();addEventListener('resize',()=>{if($('sheet').hidden)render()});document.fonts&&document.fonts.ready.then(()=>{if($('sheet').hidden)render()});
+</script>
+</body>
+</html>
