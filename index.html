@@ -4,8 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>飲料杯杯</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🧋%3C/text%3E%3C/svg%3E">
-
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#fbeae7">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="飲料杯杯">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Chiron+GoRound+TC:wght@400;500&family=Hachi+Maru+Pop&display=swap">
 <style>
 :root{--bg:#fbeae7;--card:#fffafa;--ink:#4f4954;--mute:#756a76;--line:#f1d3d0;--pink:#f6d3d8;--blue:#d6e2ea;
@@ -287,5 +292,6 @@ function del(id){data.entries=data.entries.filter(e=>e.id!==id);persist();refres
 function nod(){data.nodrink[day]=thumbOn(day)?0:1;persist();refresh(true);toast(data.nodrink[day]?'這天沒喝，給你一個讚':'已取消')}
 applyTh();render();addEventListener('resize',()=>{if($('sheet').hidden)render()});document.fonts&&document.fonts.ready.then(()=>{if($('sheet').hidden)render()});
 </script>
+<script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
 </body>
 </html>
